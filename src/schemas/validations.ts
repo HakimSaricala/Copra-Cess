@@ -1,14 +1,6 @@
 import * as z from "zod";
 
 const CreateUserInputValidation = z.object({
-  username: z
-    .string()
-    .min(2, {
-      message: "Full name must be at least 6 characters.",
-    })
-    .max(50, {
-      message: "Full name must be at most 50 characters.",
-    }),
   email: z
     .string()
     .email({
@@ -43,6 +35,7 @@ const LoginUserInputValidation = z.object({
     .max(64, {
       message: "Your password can not be longer then 64 characters long",
     }),
+  code: z.optional(z.string()),
 });
 
 export { CreateUserInputValidation, LoginUserInputValidation };

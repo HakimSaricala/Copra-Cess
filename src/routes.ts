@@ -2,13 +2,19 @@
  * Routes that do not require authentication
  */
 
-export const publicRoutes = ["/"];
+export const publicRoutes = ["/", "/new-verification"];
 
 /**
  * Routes for Authentication
  */
 
-export const authRoutes = ["/login", "/register", "/error"];
+export const authRoutes = [
+  "/login",
+  "/register",
+  "/error",
+  "/reset",
+  "/new-password",
+];
 
 /**
  * The prefix for authentication routes

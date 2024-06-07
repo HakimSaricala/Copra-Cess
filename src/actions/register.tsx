@@ -5,6 +5,7 @@ import { CreateUserInputValidation } from "@/schemas/validations";
 import { db } from "@/lib/db";
 import { getUserByEmail } from "@/data/user";
 import { generateVerificationToken } from "@/lib/tokens";
+import { sendVerificationEmail } from "@/lib/mail";
 export const register = async (
   values: z.infer<typeof CreateUserInputValidation>
 ) => {
@@ -13,7 +14,7 @@ export const register = async (
     return { error: "Invalid Fields" };
   }
 
-  const { username, email, password } = ValidateField.data;
+  const { email, password } = ValidateField.data;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const existingUser = await getUserByEmail(email);
@@ -22,11 +23,12 @@ export const register = async (
   }
   await db.user.create({
     data: {
-      username,
       email,
       password: hashedPassword,
     },
   });
   const verificationToken = await generateVerificationToken(email);
+
+  await sendVerificationEmail(verificationToken.email, verificationToken.token);
   return { success: "Email Confirmation Sent" };
 };

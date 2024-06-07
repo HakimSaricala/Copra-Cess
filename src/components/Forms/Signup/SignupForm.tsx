@@ -30,7 +30,6 @@ export const SignupForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
     },
@@ -55,7 +54,7 @@ export const SignupForm = () => {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
+          {/* <FormField
             control={form.control}
             name="username"
             render={({ field }) => (
@@ -70,7 +69,7 @@ export const SignupForm = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
           <FormField
             control={form.control}
             name="email"

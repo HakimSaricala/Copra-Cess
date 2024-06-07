@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "@/auth";
 const services = [
   {
     name: "Real-time",
